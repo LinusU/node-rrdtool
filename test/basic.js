@@ -158,4 +158,69 @@ describe('rrd', function () {
 
   });
 
+  it('should fetch a specific value', function (done) {
+
+    var start = 1405942000;
+
+    var db = rrdtool.create(path, { start: start, step: 1 }, [
+      'DS:test:GAUGE:1:0:100',
+      'RRA:AVERAGE:0:1:10'
+    ]);
+
+    var src = randomValues(10).map(function (v, i) {
+      return [start + i, v];
+    });
+
+    var target = src[5];
+
+    src.forEach(function (src) {
+      db.update(src[0], { test: src[1] });
+    });
+
+    db.fetch('AVERAGE', target[0], target[0], function (err, data) {
+      if (err) { throw err; }
+
+      assert.equal(data.length, 1);
+      assert.equal(data[0].time, target[0]);
+      assert.equal(data[0].values.test, target[1]);
+
+      done(null);
+    });
+
+  });
+
+  it('should store the max value', function (done) {
+
+    var start = 1405942000;
+
+    var db = rrdtool.create(path, { start: start, step: 1 }, [
+      'DS:test:GAUGE:1:0:100',
+      'RRA:AVERAGE:0:1:10',
+      'RRA:MAX:0:10:1'
+    ]);
+
+    var src = randomValues(11).map(function (v, i) {
+      return [start + i, v];
+    });
+
+    var max = src.reduce(function (p, c) {
+      return (p > c[1] ? p : c[1]);
+    }, 0);
+
+    src.forEach(function (src) {
+      db.update(src[0], { test: src[1] });
+    });
+
+    db.fetch('MAX', start + 10, start + 10, function (err, data) {
+      if (err) { throw err; }
+
+      assert.equal(data.length, 1);
+      assert.equal(data[0].time, start + 10);
+      assert.equal(data[0].values.test, max);
+
+      done(null);
+    });
+
+  });
+
 });
