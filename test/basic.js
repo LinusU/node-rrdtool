@@ -199,7 +199,7 @@ describe('rrd', function () {
       'RRA:MAX:0:10:1'
     ]);
 
-    var src = randomValues(11).map(function (v, i) {
+    var src = [0].concat(randomValues(10)).map(function (v, i) {
       return [start + i, v];
     });
 
