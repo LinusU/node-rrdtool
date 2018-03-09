@@ -24,7 +24,7 @@ describe('rrd', function () {
       return [start + i, v];
     });
 
-    db.fetch('MAX', start + 10, start + 10, function (err, data) {
+    db.fetch('MAX', start + 10, start + 10, 10, function (err, data) {
 
       assert.equal(data.length, 1);
       assert.equal(data[0].time, start + 10);

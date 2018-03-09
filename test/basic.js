@@ -211,7 +211,7 @@ describe('rrd', function () {
       db.update(src[0], { test: src[1] });
     });
 
-    db.fetch('MAX', start + 10, start + 10, function (err, data) {
+    db.fetch('MAX', start + 10, start + 10, 10, function (err, data) {
       if (err) { throw err; }
 
       assert.equal(data.length, 1);

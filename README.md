@@ -65,7 +65,7 @@ Insert data into the database.
  - `values`: Object with one entry per data source to insert into
  - `cb`: Callback to call when the data is inserted `(err)`
 
-#### `.fetch(cf, start, stop[, res], cb)`
+#### `.fetch(cf, start, stop[, res, daemon], cb)`
 
 Fetch a span of data from the database.
 
@@ -73,4 +73,5 @@ Fetch a span of data from the database.
  - `start`: Unix timestamp from where to start
  - `stop`: Unix timestamp of which to stop at
  - `res`: Resolution of the data, specified in seconds
+ - `daemon`: Daemon address
  - `cb`: Callback to call when the data is ready `(err, data)`
