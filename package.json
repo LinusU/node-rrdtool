@@ -1,15 +1,37 @@
 {
   "name": "rrdtool",
   "version": "0.1.2",
-  "dependencies": {
-    "async": "^0.9.0",
-    "debug": "~0.7.4"
-  },
-  "devDependencies": {
-    "mocha": "^1.20.1",
-    "tmp": "0.0.23"
+  "type": "module",
+  "license": "MIT",
+  "repository": "LinusU/node-rrdtool",
+  "keywords": [
+    "rrd",
+    "rrdtool",
+    "graph",
+    "graphing",
+    "monitoring",
+    "monitor",
+    "metrics",
+    "performance",
+    "time-series",
+    "time-series-database"
+  ],
+  "description": "A simple wrapper around RRDTool",
+  "exports": {
+    "import": "./index.js"
   },
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "standard && node --test"
+  },
+  "dependencies": {
+    "nano-spawn": "^1.0.2",
+    "p-queue": "^8.1.0"
+  },
+  "devDependencies": {
+    "fs-temp": "^2.0.1",
+    "standard": "^17.1.2"
+  },
+  "engines": {
+    "node": "^20.9.0 || ^22.11.0 || >=24.0.0"
   }
 }

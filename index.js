@@ -1,8 +1,9 @@
+import DB from './lib/db.js'
+import { now } from './lib/util.js'
 
-var DB = require('./lib/db');
-var util = require('./lib/util');
+export { now }
 
-exports.open = DB.open;
-exports.create = DB.create;
+export const create = DB.create
+export const open = DB.open
 
-exports.now = util.now;
+export default { create, now, open }
